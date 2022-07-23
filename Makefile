@@ -13,4 +13,12 @@ migrate:
 lint:
 	poetry run flake8 pollequiz
 
-.PHONY: runserver requirements migrations migrate lint
+test:
+	poetry run python manage.py test pollequiz
+
+test-cov: 
+	poetry run coverage run manage.py test
+	poetry run coverage xml
+
+test:
+.PHONY: runserver requirements migrations migrate lint test test-cov
