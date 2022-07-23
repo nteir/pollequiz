@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, ModelFormMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
@@ -11,8 +11,22 @@ import pollequiz.pq_objects as pq_objects
 User = get_user_model()
 
 
+# Custom mixin for Users app
+class SilentLoginMixin(ModelFormMixin):
+    """
+    Silently logs in user after sign up
+    or user info update.
+    """
+    def form_valid(self, form):
+        valid = super().form_valid(form)
+        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+        new_user = authenticate(username=username, password=password)
+        login(self.request, new_user)
+        return valid
+
+
 # Create your views here.
-class UserCreateView(pq_objects.PQFormContextMixin, CreateView):
+class UserCreateView(pq_objects.PQFormContextMixin, SilentLoginMixin, CreateView):
 
     model = User
     form_class = SignUpForm
@@ -26,18 +40,12 @@ class UserCreateView(pq_objects.PQFormContextMixin, CreateView):
             return HttpResponseRedirect(self.success_url)
         return super(UserCreateView, self).get(request, *args, **kwargs)
 
-    def form_valid(self, form):
-        valid = super(UserCreateView, self).form_valid(form)
-        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
-        new_user = authenticate(username=username, password=password)
-        login(self.request, new_user)
-        return valid
-
 
 class UserUpdateView(
     LoginRequiredMixin,
     pq_objects.FailedAccessMixin,
     pq_objects.PQFormContextMixin,
+    SilentLoginMixin,
     UserPassesTestMixin,
     UpdateView
 ):
