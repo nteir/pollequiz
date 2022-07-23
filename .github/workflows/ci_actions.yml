@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with: 
+          python-version: '^3.8'
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install flake8 pytest
+          python -m pip install poetry
+      - name: install requirements
+        run: poetry install
+      - name: linter
+        run: make lint
+      - name: run tests
+        run: make test
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_ENGINE: SQLite
+      - name: Publish code coverage report
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_ENGINE: SQLite
+        with:
+          coverageCommand: make test-cov
