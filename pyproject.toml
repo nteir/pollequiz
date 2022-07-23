@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "pollequiz"
+version = "0.1.0"
+description = ""
+authors = ["Natalia Teplynina <nt@mnt9.com>"]
+packages = [
+  { include = "pollequiz" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^4.0.6"
+django-bootstrap4 = "^22.1"
+python-dotenv = "^0.20.0"
+dj-database-url = "^0.5.0"
+gunicorn = "^20.1.0"
+psycopg2-binary = "^2.9.3"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+pytest-cov = "^3.0.0"
+pytest = "^7.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
