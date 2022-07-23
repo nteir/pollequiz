@@ -20,7 +20,7 @@ class PQFormContextMixin(ContextMixin):
     """
     title_text = ''
     btn_text = ''
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title_text

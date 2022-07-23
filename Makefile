@@ -10,4 +10,7 @@ migrations:
 migrate:
 	poetry run python manage.py migrate
 
-.PHONY: runserver requirements migrations migrate
+lint:
+	poetry run flake8 pollequiz
+
+.PHONY: runserver requirements migrations migrate lint

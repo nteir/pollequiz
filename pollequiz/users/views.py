@@ -13,7 +13,7 @@ User = get_user_model()
 
 # Create your views here.
 class UserCreateView(pq_objects.PQFormContextMixin, CreateView):
-    
+
     model = User
     form_class = SignUpForm
     template_name = "form.html"
@@ -34,7 +34,13 @@ class UserCreateView(pq_objects.PQFormContextMixin, CreateView):
         return valid
 
 
-class UserUpdateView(LoginRequiredMixin, pq_objects.FailedAccessMixin, pq_objects.PQFormContextMixin, UserPassesTestMixin, UpdateView):
+class UserUpdateView(
+    LoginRequiredMixin,
+    pq_objects.FailedAccessMixin,
+    pq_objects.PQFormContextMixin,
+    UserPassesTestMixin,
+    UpdateView
+):
 
     model = User
     template_name = "form.html"
@@ -49,7 +55,7 @@ class UserUpdateView(LoginRequiredMixin, pq_objects.FailedAccessMixin, pq_object
 
 
 class UserLoginView(LoginView):
-    
+
     model = User
     form_class = LoginForm
     template_name = "login.html"
