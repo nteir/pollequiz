@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <main role="main" class="container wrapper flex-grow-1">
+        <h1 class="my-4">{% translate 'All Quizes and Polls' %}</h1>
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">{% translate 'Name' %}</th>
+                    <th scope="col">{% translate 'Created by' %}</th>
+                    <th scope="col">{% translate 'Type' %}</th>
+                    <th scope="col">{% translate 'Created at' %}</th>
+                    <th scope="col">{% translate 'Last modified' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in objects %}
+                <tr>
+                    <th scope="row">{{quiz.id}}</th>
+                    <td><a href="{% url 'quiz:quiz_card' quiz.id %}">{{quiz.name}}</a></td>
+                    <td>{{quiz.author}}</td>
+                    <td>{{quiz.is_poll}}</td>
+                    <td>{{quiz.created_at}}</td>
+                    <td>{{quiz.modified_at}}</td>
+                </tr>              
+                {% endfor %}
+            </tbody> 
+        </table>
+    </main>
+{% endblock %}

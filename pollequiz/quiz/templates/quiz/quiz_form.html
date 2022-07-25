@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n bootstrap4 %}
+
+{% block content %}
+    <main role="main" class="container wrapper flex-grow-1">
+        <h1 class="my-4">{{ title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button button_text button_type="submit"  button_class="btn-dark" %}
+        </form>
+    </main>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    <h1 class="my-4">{{ title }}</h1>
+    <p>{% translate "Are you sure you want to delete" %}
+        {% if object.first_name %}
+            {{ object.first_name }} {{ object.last_name }}?
+        {% elif object.username %}
+            {{ object.username }}?
+        {% else %}
+            {{ object.name }}?
+        {% endif %}</p>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_button button_text button_type="submit" button_class="btn-danger" %}
+    </form>
+</main>
+{% endblock %}

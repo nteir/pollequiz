@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'pollequiz',
     'pollequiz.users',
+    'pollequiz.quiz',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate 'Quiz' %}</h1>
+
+    <div class="card">
+        <h5 class="card-header">{{quiz.name}}</h5>
+        <div class="card-body">
+          <p class="card-text">{{quiz.description}}</p>
+          <table class="table table-sm table-borderless">
+            <tr>
+                <td>{% translate 'Author' %}</td>
+                <td>{{quiz.author}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Created at' %}</td>
+                <td>{{quiz.created_at}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Last modified' %}</td>
+                <td>{{quiz.modified_at}}</td>
+            </tr>
+          </table>
+          <a href="{% url 'quiz:quiz_update' quiz.id %}" class="btn btn-dark">{% translate 'Update' %}</a>
+          <a href="{% url 'quiz:quiz_delete' quiz.id %}" class="btn btn-dark">{% translate 'Delete' %}</a>
+        </div>
+      </div>
+
+</main>
+{% endblock content %}
