@@ -20,8 +20,5 @@ test-cov:
 	poetry run coverage run manage.py test
 	poetry run coverage xml
 
-requirements:
-	poetry export -f requirements.txt -o requirements.txt --without-hashes
-
 test:
-.PHONY: runserver requirements migrations migrate lint test test-cov requirements
+.PHONY: runserver requirements migrations migrate lint test test-cov
