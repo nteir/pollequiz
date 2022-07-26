@@ -3,7 +3,7 @@
 
 {% block content %}
 <main role="main" class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate 'Quiz' %}</h1>
+    <h1 class="my-4">{% translate 'Quiz details' %}</h1>
 
     <div class="card">
         <h5 class="card-header">{{quiz.name}}</h5>
@@ -12,7 +12,12 @@
           <table class="table table-sm table-borderless">
             <tr>
                 <td>{% translate 'Author' %}</td>
-                <td>{{quiz.author}}</td>
+                <td>
+                  {{quiz.author}}
+                  {% if quiz.author.first_name or quiz.author.last_name %}
+                    <br/>{{quiz.author.first_name}} {{quiz.author.last_name}}
+                  {% endif %}
+                </td>
             </tr>
             <tr>
                 <td>{% translate 'Created at' %}</td>
