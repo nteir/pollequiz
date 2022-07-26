@@ -16,12 +16,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for quiz in objects %}
+                {% for quiz in filter.qs %}
                 <tr>
                     <th scope="row">{{quiz.id}}</th>
                     <td><a href="{% url 'quiz:quiz_card' quiz.id %}">{{quiz.name}}</a></td>
                     <td>{{quiz.author}}</td>
-                    <td>{{quiz.is_poll}}</td>
+                    <td>
+                        {% if quiz.is_poll %}
+                            {% translate 'Poll' %}
+                        {% else %}
+                            {% translate 'Quiz' %}
+                        {% endif %}
+                    </td>
                     <td>{{quiz.created_at}}</td>
                     <td>{{quiz.modified_at}}</td>
                 </tr>              

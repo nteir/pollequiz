@@ -1,6 +1,6 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-# from django_filters.views import FilterView
+from django_filters.views import FilterView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from pollequiz.quiz.models import Quiz
@@ -21,12 +21,18 @@ class QuizDetailView(LoginRequiredMixin, DetailView):
     redirect_url = reverse_lazy('users:login')
 
 
-class QuizListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, ListView):
+class QuizListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, FilterView):
     model = Quiz
     ordering = ['id']
     redirect_url = reverse_lazy('users:login')
     template_name = 'quiz/list.html'
     context_object_name = 'objects'
+
+
+class MyQuizListView(QuizListView):
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(author=self.request.user.id)
+        return queryset
 
 
 class QuizCreateView(
@@ -42,6 +48,9 @@ class QuizCreateView(
     redirect_url = reverse_lazy('users:login')
     title_text = txt.CREATE_QUIZ_TITLE
     btn_text = txt.CREATE_BTN
+
+    def get_success_url(self):
+        return reverse_lazy('quiz:quiz_card', kwargs={'pk': self.object.id})
 
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id
