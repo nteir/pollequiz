@@ -1,21 +1,23 @@
 import django_filters
-from django import forms
 from pollequiz.quiz.models import Quiz
+import pollequiz.text_constants as txt
 
 
 class QuizFilter(django_filters.FilterSet):
+    POLL_CHOICES = (
+        (False, 'Quiz'),
+        (True, 'Poll'),
+    )
+
+    name = django_filters.CharFilter(field_name='name', lookup_expr='icontains')
+    is_poll = django_filters.ChoiceFilter(field_name='is_poll', choices=POLL_CHOICES, label=txt.POLL_FILTER_LABEL)
+
     class Meta:
         model = Quiz
         fields = ['name', 'author', 'is_poll']
 
 
 class MyQuizFilter(QuizFilter):
-    self_tasks = django_filters.filters.BooleanFilter(
-        widget=forms.CheckboxInput(),
-        method='get_my_quizes',
-    )
-
-    def get_my_quizes(self, queryset, name, value):
-        author = getattr(self.request, "user", None)
-        queryset = queryset.filter(author=author)
-        return queryset
+    class Meta:
+        model = Quiz
+        fields = ['name', 'is_poll']

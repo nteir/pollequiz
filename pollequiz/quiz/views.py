@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 import pollequiz.pq_objects as pq_objects
 import pollequiz.text_constants as txt
+from .filter import QuizFilter, MyQuizFilter
 
 User = get_user_model()
 
@@ -21,15 +22,19 @@ class QuizDetailView(LoginRequiredMixin, DetailView):
     redirect_url = reverse_lazy('users:login')
 
 
-class QuizListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, FilterView):
+class QuizListView(pq_objects.FailedAccessMixin, pq_objects.PQFormContextMixin, LoginRequiredMixin, FilterView):
     model = Quiz
+    filterset_class = QuizFilter
     ordering = ['id']
     redirect_url = reverse_lazy('users:login')
     template_name = 'quiz/list.html'
     context_object_name = 'objects'
+    btn_text = txt.FILTER_BTN
 
 
 class MyQuizListView(QuizListView):
+    filterset_class = MyQuizFilter
+
     def get_queryset(self):
         queryset = super().get_queryset().filter(author=self.request.user.id)
         return queryset

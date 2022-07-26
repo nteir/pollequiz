@@ -11,3 +11,6 @@ SIGNUP_BTN = _('Sign Up')
 UPDATE_BTN = _('Update')
 CREATE_BTN = _('Add')
 DELETE_BTN = _('Delete')
+FILTER_BTN = _('Filter')
+
+POLL_FILTER_LABEL = _('Type')

@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n bootstrap4 %}
 
 {% block content %}
     <main role="main" class="container wrapper flex-grow-1">
         <h1 class="my-4">{% translate 'All Quizes and Polls' %}</h1>
+        <div class="container">
+            <form class="form-inline center my-auto" method="get">
+                {% csrf_token %}
+                {% bootstrap_form filter.form form_group_class="form-group" field_class="ml-2 mr-3 my-3" %}
+                {% bootstrap_button button_text button_type="submit"  button_class="btn btn-dark" %}
+            </form>
+        </div>
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
