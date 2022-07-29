@@ -15,8 +15,6 @@ class QuizTestCase(TestCase):
         self.user = User.objects.get(pk=1)
         self.model = Quiz
         self.object = self.model.objects.get(pk=1)
-        # self.object2 = self.model.objects.get(pk=2)
-        # self.object3 = self.model.objects.get(pk=3)
         self.object_list = list(self.model.objects.all())
         self.context_name = 'objects'
         self.new_data = {

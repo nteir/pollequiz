@@ -5,6 +5,9 @@
     <main role="main" class="container wrapper flex-grow-1">
         <h1 class="my-4">{% translate 'All Quizes and Polls' %}</h1>
         <div class="container">
+            <a href="{% url 'quiz:new' %}" class="btn btn-dark">{% translate 'New quiz' %}</a>
+        </div>
+        <div class="container">
             <form class="form-inline center my-auto" method="get">
                 {% csrf_token %}
                 {% bootstrap_form filter.form form_group_class="form-group" field_class="ml-2 mr-3 my-3" %}

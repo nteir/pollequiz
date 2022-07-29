@@ -29,18 +29,24 @@
             </tr>
           </table>
           {% if user.id == quiz.author.id %}
-          <a href="{% url 'quiz:quiz_update' quiz.id %}" class="btn btn-dark">{% translate 'Update' %}</a>
+          <a href="{% url 'quiz:quiz_update' quiz.id %}" class="btn btn-dark">{% translate 'Edit' %}</a>
           <a href="{% url 'quiz:quiz_delete' quiz.id %}" class="btn btn-dark">{% translate 'Delete' %}</a>
+          <a href="{% url 'quiz:question_new' quiz.id %}" class="btn btn-dark">{% translate 'Add question' %}</a>
           {% endif %}
           {% if objects %}
-          <div class="card mt-3" style="width: 18rem;">
+          <div class="card mt-3">
             <div class="card-body">
               <h5 class="card-title">{% translate 'Questions' %}</h5>
               <table class="table table-sm table-borderless">
                 {% for question in objects %}
                   <tr>
                     <td>{{question.q_number}}</td>
-                    <td>{{question.text}}</td>
+                    <td>{{question.text|slice:30}}</td>
+                    <td>{{question.get_q_type_display}}</td>
+                    <td>
+                        <a href="{% url 'quiz:question_update' quiz.id question.id %}" class="btn btn-dark">{% translate 'Edit' %}</a>
+                        <a href="{% url 'quiz:question_delete' quiz.id question.id %}" class="btn btn-dark">{% translate 'Delete' %}</a>
+                    </td>
                   </tr>
                 {% endfor %}
               </table>

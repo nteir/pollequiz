@@ -10,8 +10,10 @@
             {{ object.first_name }} {{ object.last_name }}?
         {% elif object.username %}
             {{ object.username }}?
-        {% else %}
+        {% elif object.name %}
             {{ object.name }}?
+        {% else %}
+            "{{ object.text }}"?
         {% endif %}</p>
     <form method="post">
         {% csrf_token %}
