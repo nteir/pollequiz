@@ -20,12 +20,7 @@ jobs:
         run: poetry install
       - name: linter
         run: make lint
-      - name: run tests
-        run: make test
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DB_ENGINE: SQLite
-      - name: Publish code coverage report
+      - name: run tests and publish coverage report
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
