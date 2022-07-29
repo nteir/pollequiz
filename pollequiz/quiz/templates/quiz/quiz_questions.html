@@ -41,7 +41,7 @@
                 {% for question in objects %}
                   <tr>
                     <td>{{question.q_number}}</td>
-                    <td>{{question.text|slice:30}}</td>
+                    <td>{{question.text|truncatechars:40}}</td>
                     <td>{{question.get_q_type_display}}</td>
                     <td>
                         <a href="{% url 'quiz:question_update' quiz.id question.id %}" class="btn btn-dark">{% translate 'Edit' %}</a>
