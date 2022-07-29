@@ -11,3 +11,17 @@ class Quiz(models.Model):
     description = models.TextField(blank=True, verbose_name=_('Description (optional)'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
     modified_at = models.DateTimeField(auto_now=True, verbose_name=_('Last modified'))
+
+
+class Question(models.Model):
+
+    TYPES = (
+        ('sing', _('Single choice')),
+        ('mult', _('Multiple choice')),
+        ('open', _('Open ended')),
+    )
+
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, verbose_name=_('Quiz'))
+    q_number = models.IntegerField()
+    q_type = models.CharField(choices=TYPES, max_length=4)
+    text = models.TextField()

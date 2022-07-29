@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate 'Quiz details' %}</h1>
+
+    <div class="card">
+        <h5 class="card-header">{{quiz.name}}</h5>
+        <div class="card-body">
+          <p class="card-text">{{quiz.description}}</p>
+          <table class="table table-sm table-borderless">
+            <tr>
+                <td>{% translate 'Author' %}</td>
+                <td>
+                  {{quiz.author}}
+                  {% if quiz.author.first_name or quiz.author.last_name %}
+                    <br/>{{quiz.author.first_name}} {{quiz.author.last_name}}
+                  {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>{% translate 'Created at' %}</td>
+                <td>{{quiz.created_at}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Last modified' %}</td>
+                <td>{{quiz.modified_at}}</td>
+            </tr>
+          </table>
+          {% if user.id == quiz.author.id %}
+          <a href="{% url 'quiz:quiz_update' quiz.id %}" class="btn btn-dark">{% translate 'Update' %}</a>
+          <a href="{% url 'quiz:quiz_delete' quiz.id %}" class="btn btn-dark">{% translate 'Delete' %}</a>
+          {% endif %}
+          {% if objects %}
+          <div class="card mt-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Questions' %}</h5>
+              <table class="table table-sm table-borderless">
+                {% for question in objects %}
+                  <tr>
+                    <td>{{question.q_number}}</td>
+                    <td>{{question.text}}</td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+    </div>
+
+</main>
+{% endblock content %}

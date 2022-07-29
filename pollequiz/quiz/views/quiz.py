@@ -1,5 +1,4 @@
 from django.views.generic.detail import DetailView
-# from django.views.generic.list import ListView
 from django_filters.views import FilterView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -9,12 +8,11 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 import pollequiz.pq_objects as pq_objects
 import pollequiz.text_constants as txt
-from .filter import QuizFilter, MyQuizFilter
+from pollequiz.quiz.filter import QuizFilter, MyQuizFilter
 
 User = get_user_model()
 
 
-# Create your views here.
 class QuizDetailView(LoginRequiredMixin, DetailView):
     model = Quiz
     template_name = "quiz/quiz_card.html"
