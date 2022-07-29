@@ -19,4 +19,5 @@ class QuestionForm(forms.ModelForm):
             'q_number',
             'q_type',
             'text',
+            'points',
         ]

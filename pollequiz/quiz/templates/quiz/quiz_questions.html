@@ -43,6 +43,7 @@
                     <td>{{question.q_number}}</td>
                     <td>{{question.text|truncatechars:40}}</td>
                     <td>{{question.get_q_type_display}}</td>
+                    <td>{% translate 'Points' %}: {{question.points}}</td>
                     <td>
                         <a href="{% url 'quiz:question_update' quiz.id question.id %}" class="btn btn-dark">{% translate 'Edit' %}</a>
                         <a href="{% url 'quiz:question_delete' quiz.id question.id %}" class="btn btn-dark">{% translate 'Delete' %}</a>

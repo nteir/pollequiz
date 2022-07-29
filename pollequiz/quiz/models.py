@@ -25,3 +25,11 @@ class Question(models.Model):
     q_number = models.IntegerField()
     q_type = models.CharField(choices=TYPES, max_length=4)
     text = models.TextField()
+    points = models.IntegerField(default=0, verbose_name=_('Points for correct answer'))
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name=_('Question'))
+    a_number = models.IntegerField()
+    text = models.TextField()
+    correct = models.BooleanField(default=False)
