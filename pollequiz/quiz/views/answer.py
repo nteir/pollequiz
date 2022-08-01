@@ -51,7 +51,10 @@ class AnswerCreateView(
     btn_text = txt.CREATE_BTN
 
     def get_success_url(self):
-        return reverse_lazy('quiz:question_card', kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id})
+        return reverse_lazy(
+            'quiz:question_card',
+            kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
+        )
 
     def form_valid(self, form):
         form.instance.question_id = self.kwargs['q_id']
@@ -80,7 +83,10 @@ class AnswerUpdateView(
     btn_text = txt.UPDATE_BTN
 
     def get_success_url(self):
-        return reverse_lazy('quiz:question_card', kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id})
+        return reverse_lazy(
+            'quiz:question_card',
+            kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -108,7 +114,10 @@ class AnswerDeleteView(
     btn_text = txt.DELETE_BTN
 
     def get_success_url(self):
-        return reverse_lazy('quiz:question_card', kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id})
+        return reverse_lazy(
+            'quiz:question_card',
+            kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
+        )
 
     def test_func(self):
         author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
