@@ -24,7 +24,7 @@ class AnswerListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, ListView)
         if self.kwargs['quiz_id']:
             context['quiz'] = Quiz.objects.get(id=self.kwargs['quiz_id'])
         if self.kwargs['q_id']:
-            context['question'] = Question.objects.get(id=self.kwargs['quiz_id'])
+            context['question'] = Question.objects.get(id=self.kwargs['q_id'])
         return context
 
     def get_queryset(self):
