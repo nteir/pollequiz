@@ -4,6 +4,9 @@
 {% block content %}
     <main role="main" class="container wrapper flex-grow-1">
         <h1 class="my-4">{{ title }}</h1>
+        {% if subtitle %}
+        <h5 class="my-4">{{ subtitle }}</h5>
+        {% endif %}
         <form method="post">
             {% csrf_token %}
             {% bootstrap_form form %}

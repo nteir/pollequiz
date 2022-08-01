@@ -22,7 +22,7 @@ class Question(models.Model):
     )
 
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, verbose_name=_('Quiz'))
-    q_number = models.IntegerField()
+    q_number = models.IntegerField(verbose_name=_('Question number'))
     q_type = models.CharField(choices=TYPES, max_length=4)
     text = models.TextField()
     points = models.IntegerField(default=0, verbose_name=_('Points for correct answer'))
@@ -30,6 +30,6 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name=_('Question'))
-    a_number = models.IntegerField()
+    a_number = models.IntegerField(verbose_name=_('Answer number'))
     text = models.TextField()
-    correct = models.BooleanField(default=False)
+    correct = models.BooleanField(default=False, verbose_name=_('This answer is correct'))
