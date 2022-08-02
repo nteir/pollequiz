@@ -18,7 +18,7 @@ class Question(models.Model):
     TYPES = (
         ('sing', _('Single choice')),
         ('mult', _('Multiple choice')),
-        ('open', _('Open ended')),
+        # ('open', _('Open ended')),
     )
 
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, verbose_name=_('Quiz'))

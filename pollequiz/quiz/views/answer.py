@@ -11,7 +11,7 @@ import pollequiz.text_constants as txt
 User = get_user_model()
 
 
-class AnswerListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, ListView):
+class AnswerListView(pq_objects.FailedAccessMixin, pq_objects.PQQuerySetMixin, LoginRequiredMixin, ListView):
     model = Answer
     ordering = ['a_number']
     redirect_url = reverse_lazy('users:login')
@@ -25,15 +25,6 @@ class AnswerListView(pq_objects.FailedAccessMixin, LoginRequiredMixin, ListView)
         if self.kwargs['q_id']:
             context['question'] = Question.objects.get(id=self.kwargs['q_id'])
         return context
-
-    def get_queryset(self):
-        if self.kwargs['quiz_id'] and self.kwargs['q_id']:
-            author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-            if self.request.user != author:
-                return []
-            qset = Answer.objects.filter(question=self.kwargs['q_id']).order_by('a_number')
-            return qset
-        return []
 
 
 class AnswerCreateView(
