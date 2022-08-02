@@ -40,17 +40,17 @@ class PQQuerySetMixin(MultipleObjectMixin):
     answers for a quiz created by current user.
     """
     def get_queryset(self):
-        if self.kwargs.get('quiz_id'):
-            author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-            if self.request.user != author:
-                return []
-            queryset = super().get_queryset()
-            if self.kwargs.get('q_id'):
-                queryset = queryset.filter(question=self.kwargs['q_id'])
-            else:
-                queryset = queryset.filter(quiz=self.kwargs['quiz_id'])
-            return queryset
-        return []
+        if self.kwargs.get('quiz_id') is None:
+            return []
+        author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
+        if self.request.user != author:
+            return []
+        queryset = super().get_queryset()
+        if self.kwargs.get('q_id'):
+            queryset = queryset.filter(question=self.kwargs['q_id'])
+        else:
+            queryset = queryset.filter(quiz=self.kwargs['quiz_id'])
+        return queryset
 
 
 class PQUserTestMixin(UserPassesTestMixin):
