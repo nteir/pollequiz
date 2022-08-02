@@ -20,9 +20,9 @@ class AnswerListView(pq_objects.FailedAccessMixin, pq_objects.PQQuerySetMixin, L
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.kwargs['quiz_id']:
+        if self.kwargs.get('quiz_id'):
             context['quiz'] = Quiz.objects.get(id=self.kwargs['quiz_id'])
-        if self.kwargs['q_id']:
+        if self.kwargs.get('q_id'):
             context['question'] = Question.objects.get(id=self.kwargs['q_id'])
         return context
 

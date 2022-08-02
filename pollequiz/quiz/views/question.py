@@ -20,7 +20,7 @@ class QuestionsListView(pq_objects.FailedAccessMixin, pq_objects.PQQuerySetMixin
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.kwargs['quiz_id']:
+        if self.kwargs.get('quiz_id'):
             context['quiz'] = Quiz.objects.get(id=self.kwargs['quiz_id'])
         return context
 
