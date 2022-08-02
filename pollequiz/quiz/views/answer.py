@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from pollequiz.quiz.models import Quiz, Question, Answer
 from pollequiz.quiz.forms import AnswerForm
 from django.contrib.auth import get_user_model
@@ -56,7 +56,7 @@ class AnswerUpdateView(
     pq_objects.FailedAccessMixin,
     pq_objects.PQFormContextMixin,
     LoginRequiredMixin,
-    UserPassesTestMixin,
+    pq_objects.PQUserTestMixin,
     UpdateView
 ):
     model = Answer
@@ -73,16 +73,12 @@ class AnswerUpdateView(
             kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
         )
 
-    def test_func(self):
-        author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-        return self.request.user == author
-
 
 class AnswerDeleteView(
     pq_objects.FailedAccessMixin,
     pq_objects.PQFormContextMixin,
     LoginRequiredMixin,
-    UserPassesTestMixin,
+    pq_objects.PQUserTestMixin,
     DeleteView
 ):
     model = Answer
@@ -97,7 +93,3 @@ class AnswerDeleteView(
             'quiz:question_card',
             kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
         )
-
-    def test_func(self):
-        author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-        return self.request.user == author

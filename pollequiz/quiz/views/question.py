@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from pollequiz.quiz.models import Quiz, Question
 from pollequiz.quiz.forms import QuestionForm
 from django.contrib.auth import get_user_model
@@ -51,7 +51,7 @@ class QuestionUpdateView(
     pq_objects.FailedAccessMixin,
     pq_objects.PQFormContextMixin,
     LoginRequiredMixin,
-    UserPassesTestMixin,
+    pq_objects.PQUserTestMixin,
     UpdateView
 ):
     model = Question
@@ -65,16 +65,12 @@ class QuestionUpdateView(
     def get_success_url(self):
         return reverse_lazy('quiz:quiz_card', kwargs={'quiz_id': self.object.quiz.id})
 
-    def test_func(self):
-        author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-        return self.request.user == author
-
 
 class QuestionDeleteView(
     pq_objects.FailedAccessMixin,
     pq_objects.PQFormContextMixin,
     LoginRequiredMixin,
-    UserPassesTestMixin,
+    pq_objects.PQUserTestMixin,
     DeleteView
 ):
     model = Question
@@ -86,7 +82,3 @@ class QuestionDeleteView(
 
     def get_success_url(self):
         return reverse_lazy('quiz:quiz_card', kwargs={'quiz_id': self.object.quiz.id})
-
-    def test_func(self):
-        author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
-        return self.request.user == author

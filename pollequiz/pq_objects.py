@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import AccessMixin
 from django.views.generic.base import ContextMixin
 from django.views.generic.list import MultipleObjectMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
 from pollequiz.quiz.models import Quiz, Question
 
@@ -50,3 +51,16 @@ class PQQuerySetMixin(MultipleObjectMixin):
                 queryset = queryset.filter(quiz=self.kwargs['quiz_id'])
             return queryset
         return []
+
+
+class PQUserTestMixin(UserPassesTestMixin):
+    """
+    See that the current user is the author
+    of selected quiz.
+    """
+    def test_func(self):
+        if self.kwargs.get('quiz_id'):
+            author = Quiz.objects.get(id=self.kwargs['quiz_id']).author
+            return self.request.user == author
+        else:
+            return False
