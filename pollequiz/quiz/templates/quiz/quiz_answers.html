@@ -26,7 +26,6 @@
                     <td>
                       {{answer.text|truncatechars:40}}
                     </td>
-                    <td>{{answer.text}}</td>
                     <td>{% translate 'Correct' %}: {{answer.correct}}</td>
                     <td>
                         <a href="{% url 'quiz:answer_update' quiz.id question.id answer.id %}" class="btn btn-dark">{% translate 'Edit' %}</a>
