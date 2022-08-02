@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import AccessMixin
 from django.views.generic.base import ContextMixin
 from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from pollequiz.quiz.models import Quiz, Question
 
 
@@ -64,3 +66,14 @@ class PQUserTestMixin(UserPassesTestMixin):
             return self.request.user == author
         else:
             return False
+
+
+class PQSuccessRedirectMixin(SingleObjectMixin):
+    """
+    Form redirect url for Answer edit views.
+    """
+    def get_success_url(self):
+        return reverse_lazy(
+            'quiz:question_card',
+            kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
+        )
