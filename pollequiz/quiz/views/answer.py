@@ -51,12 +51,6 @@ class AnswerCreateView(
         form.instance.question_id = self.kwargs['q_id']
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.kwargs['q_id']:
-            context['subtitle'] = Question.objects.get(id=self.kwargs['q_id']).text
-        return context
-
 
 class AnswerUpdateView(
     pq_objects.FailedAccessMixin,
@@ -78,12 +72,6 @@ class AnswerUpdateView(
             'quiz:question_card',
             kwargs={'quiz_id': self.object.question.quiz_id, 'q_id': self.object.question.id}
         )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.kwargs['q_id']:
-            context['subtitle'] = Question.objects.get(id=self.kwargs['q_id']).text
-        return context
 
     def test_func(self):
         author = Quiz.objects.get(id=self.kwargs['quiz_id']).author

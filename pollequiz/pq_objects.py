@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.views.generic.base import ContextMixin
 from django.views.generic.list import MultipleObjectMixin
 from django.shortcuts import redirect
-from pollequiz.quiz.models import Quiz
+from pollequiz.quiz.models import Quiz, Question
 
 
 class FailedAccessMixin(AccessMixin):
@@ -18,7 +18,8 @@ class FailedAccessMixin(AccessMixin):
 
 class PQFormContextMixin(ContextMixin):
     """
-    Adds title and button text to forms.
+    Adds title and button text to forms,
+    and some other situational context elements.
     """
     title_text = ''
     btn_text = ''
@@ -27,6 +28,8 @@ class PQFormContextMixin(ContextMixin):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title_text
         context['button_text'] = self.btn_text
+        if self.kwargs.get('q_id'):
+            context['subtitle'] = Question.objects.get(id=self.kwargs['q_id']).text
         return context
 
 
