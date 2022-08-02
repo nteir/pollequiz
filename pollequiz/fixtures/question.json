@@ -1,0 +1,46 @@
+[
+{
+    "model": "quiz.question",
+    "pk": 1,
+    "fields": {
+        "quiz": 1,
+        "q_number": 10,
+        "q_type": "mult",
+        "text": "Q1 Quiz1",
+        "points": 10
+    }
+},
+{
+    "model": "quiz.question",
+    "pk": 2,
+    "fields": {
+        "quiz": 1,
+        "q_number": 20,
+        "q_type": "sing",
+        "text": "Reeeeeeee",
+        "points": 10
+    }
+},
+{
+    "model": "quiz.question",
+    "pk": 3,
+    "fields": {
+        "quiz": 3,
+        "q_number": 15,
+        "q_type": "mult",
+        "text": "Ararara dadada more characters long question some text",
+        "points": 5
+    }
+},
+{
+    "model": "quiz.question",
+    "pk": 4,
+    "fields": {
+        "quiz": 3,
+        "q_number": 30,
+        "q_type": "sing",
+        "text": "Some more",
+        "points": 2
+    }
+}
+]

@@ -1,0 +1,62 @@
+[
+{
+    "model": "quiz.answer",
+    "pk": 1,
+    "fields": {
+        "question": 1,
+        "a_number": 15,
+        "text": "Option ONE",
+        "correct": true
+    }
+},
+{
+    "model": "quiz.answer",
+    "pk": 2,
+    "fields": {
+        "question": 1,
+        "a_number": 20,
+        "text": "Option 2 edited",
+        "correct": false
+    }
+},
+{
+    "model": "quiz.answer",
+    "pk": 3,
+    "fields": {
+        "question": 1,
+        "a_number": 30,
+        "text": "New option 3",
+        "correct": false
+    }
+},
+{
+    "model": "quiz.answer",
+    "pk": 4,
+    "fields": {
+        "question": 1,
+        "a_number": 10,
+        "text": "10 first",
+        "correct": true
+    }
+},
+{
+    "model": "quiz.answer",
+    "pk": 5,
+    "fields": {
+        "question": 3,
+        "a_number": 5,
+        "text": "5 next",
+        "correct": false
+    }
+},
+{
+    "model": "quiz.answer",
+    "pk": 6,
+    "fields": {
+        "question": 3,
+        "a_number": 10,
+        "text": "Firstest answer",
+        "correct": false
+    }
+}
+]

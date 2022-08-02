@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-# Create your tests here.
 class QuizTestCase(TestCase):
 
     fixtures = ['quiz.json', 'users.json']
@@ -15,7 +14,7 @@ class QuizTestCase(TestCase):
         self.user = User.objects.get(pk=1)
         self.model = Quiz
         self.object = self.model.objects.get(pk=1)
-        self.object_list = list(self.model.objects.all())
+        self.object_list = self.model.objects.all().order_by('id')
         self.context_name = 'objects'
         self.new_data = {
             'name': 'tquiz',
