@@ -59,8 +59,8 @@ class TakeQuestion(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
-        q_list = list(Question.objects.filter(quiz=quiz.id).order_by('q_number'))
+        # quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        # q_list = list(Question.objects.filter(quiz=quiz.id).order_by('q_number'))
         return context
 
     def get_form(self, form_class=QuestionForm):
