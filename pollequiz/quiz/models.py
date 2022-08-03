@@ -12,6 +12,9 @@ class Quiz(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
     modified_at = models.DateTimeField(auto_now=True, verbose_name=_('Last modified'))
 
+    def get_questions_list(self):
+        return list(Question.objects.filter(quiz=self.id).order_by('q_number'))
+
 
 class Question(models.Model):
 
@@ -26,6 +29,9 @@ class Question(models.Model):
     q_type = models.CharField(choices=TYPES, max_length=4)
     text = models.TextField()
     points = models.IntegerField(default=0, verbose_name=_('Points for correct answer'))
+
+    def get_answers_list(self):
+        return list(Answer.objects.filter(question=self.id).order_by('a_number'))
 
 
 class Answer(models.Model):

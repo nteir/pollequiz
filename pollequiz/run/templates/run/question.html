@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n bootstrap4 %}
+
+{% block content %}
+    <main role="main" class="container wrapper flex-grow-1">
+
+        <p class="lead">{{ question.text }}</p>
+        <form action="" method="POST">{% csrf_token %}
+            <input type=hidden name="question_id" value="{{ question.id }}">
+            <ul class="list-group">
+
+              {% for answer in form.answers %}
+                <li class="list-group-item">
+                  {{ answer }}
+                </li>
+              {% endfor %}
+          
+            </ul>
+              <input type="submit" value={% trans "Submit" %} class="btn btn-warning" >
+        </form>
+
+    </main>
+{% endblock %}
