@@ -22,4 +22,5 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('account/', include('pollequiz.users.urls')),
     path('quiz/', include('pollequiz.quiz.urls')),
+    path('test/', include('pollequiz.run.urls')),
 ]

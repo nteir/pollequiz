@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'pollequiz',
     'pollequiz.users',
     'pollequiz.quiz',
+    'pollequiz.run',
 ]
 
 MIDDLEWARE = [
