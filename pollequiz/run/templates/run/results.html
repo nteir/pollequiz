@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n bootstrap4 %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    {{ objects }}
+    {% for obj in objects %}
+    <p>{{ obj.q_id.text }} {{ obj.a_id.text }}</p>
+    {% endfor %}
+</main>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django_filters.views import FilterView
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.views.generic import FormView
 from pollequiz.run.forms import TakeForm, QuestionForm
 from pollequiz.quiz.models import Quiz, Question, Answer
@@ -94,3 +95,13 @@ class TakeQuestion(FormView):
         log_entry.a_id = Answer.objects.get(id=form.data.get('answers'))
         log_entry.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class QuizResult(ListView):
+    model = QuizTakeLog
+    template_name = 'run/results.html'
+    context_object_name = 'objects'
+
+    def get_queryset(self):
+        queryset = QuizTakeLog.objects.filter(take_id=self.kwargs['pk']).select_related('q_id', 'a_id')
+        return queryset
