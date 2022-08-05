@@ -4,9 +4,9 @@
 {% block content %}
     <main role="main" class="container wrapper flex-grow-1">
 
-        <p class="lead">{{ question.text }}</p>
+      <p class="lead">{{ question.text }}</p>  
         <form action="" method="POST">{% csrf_token %}
-            <input type=hidden name="question_id" value="{{ question.id }}">
+          <input type=hidden name="question_id" value="{{ question.id }}">
             <ul class="list-group">
 
               {% for answer in form.answers %}
