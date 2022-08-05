@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'pollequiz',
     'pollequiz.users',
+    'pollequiz.api',
     'pollequiz.quiz',
     'pollequiz.run',
 ]
