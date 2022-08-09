@@ -1,6 +1,7 @@
 __pycache__
 dist/
 *.pyc
+*.http
 .venv/
 .coverage
 coverage.xml

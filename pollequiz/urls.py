@@ -19,6 +19,7 @@ from .views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
     path('', HomeView.as_view(), name='home'),
     path('account/', include('pollequiz.users.urls')),
     path('api/', include('pollequiz.api.urls')),
