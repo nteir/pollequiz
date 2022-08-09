@@ -4,5 +4,7 @@ from pollequiz.api import views
 
 app_name = 'api'
 urlpatterns = [
-    path('', views.api_home, name='api_home')
+    path('', views.QuizListAPIView.as_view(), name='quiz_list'),
+    path('<int:pk>/', views.QuizAPIView.as_view(), name='quiz_detail'),
+    path('full/<int:pk>/', views.FullQuizAPIView.as_view(), name='quiz_full'),
 ]
