@@ -6,7 +6,7 @@
     <h1 class="my-4">{% translate 'Question details' %}</h1>
 
     <div class="card">
-        <h5 class="card-header">{{quiz.name}}</h5>
+        <h5 class="card-header"><a href="{% url 'quiz:quiz_card' quiz.id %}">{{quiz.name}}</a></h5>
         <div class="card-body">
           <p>{% translate 'Question' %} {{question.q_number}}</p>
           <p class="card-text">{{question.text}}</p>

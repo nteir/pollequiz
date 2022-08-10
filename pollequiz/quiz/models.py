@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext as _
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.utils import timezone
 
 
 # Create your models here.
@@ -39,3 +42,17 @@ class Answer(models.Model):
     a_number = models.IntegerField(verbose_name=_('Answer number'))
     text = models.TextField()
     correct = models.BooleanField(default=False, verbose_name=_('This answer is correct'))
+
+
+@receiver(post_save, sender=Question)
+def question_save_handler(instance, *args, **kwargs):
+    quiz = instance.quiz
+    quiz.modified_at = timezone.now()
+    quiz.save()
+
+
+@receiver(post_save, sender=Answer)
+def question_save_handler(instance, *args, **kwargs):
+    quiz = instance.question.quiz
+    quiz.modified_at = timezone.now()
+    quiz.save()
