@@ -3,9 +3,13 @@
 
 {% block content %}
 <main role="main" class="container wrapper flex-grow-1">
-    {{ objects }}
+    {% comment %} {{ objects }}
     {% for obj in objects %}
     <p>{{ obj.q_id.text }} {{ obj.a_id.text }}</p>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+    <h5>{% translate 'Your results:' %}</h5>
+    <p>{% translate 'Answered correctly:' %} {{ correct }}</p>
+    <p>{% translate 'Answered incorrectly:' %} {{ incorrect }}</p>
+    <p>{% translate 'Points earned:' %} {{ total_points }}</p>
 </main>
 {% endblock %}
