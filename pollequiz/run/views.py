@@ -124,12 +124,9 @@ class QuizResult(ListView):
 
         results = self.get_queryset()
         answer_set = [entry.a_id for entry in list(results)]
-        # print(answer_set)
         quiz_take = QuizTake.objects.get(id=self.kwargs['pk'])
         quiz = Quiz.objects.get(id=quiz_take.quiz.id)
-        # print(quiz)
         q_list = quiz.get_questions_list()
-        # print(q_list)
         total_points = 0
         correct = 0
         for qu in q_list:
@@ -138,8 +135,10 @@ class QuizResult(ListView):
             for a in a_list:
                 if a.correct and a not in answer_set:
                     is_correct = False
+                    break
                 if not a.correct and a in answer_set:
                     is_correct = False
+                    break
             if is_correct:
                 correct += 1
                 total_points += qu.points
