@@ -19,7 +19,7 @@ class QuizListView(pq_objects.PQFormContextMixin, FilterView):
     model = Quiz
     filterset_class = QuizFilter
     template_name = 'run/quiz_list.html'
-    ordering = ['-created_at']
+    ordering = ['-modified_at']
     context_object_name = 'objects'
     btn_text = txt.FILTER_BTN
 

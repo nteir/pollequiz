@@ -52,7 +52,7 @@ def question_save_handler(instance, *args, **kwargs):
 
 
 @receiver(post_save, sender=Answer)
-def question_save_handler(instance, *args, **kwargs):
+def answer_save_handler(instance, *args, **kwargs):
     quiz = instance.question.quiz
     quiz.modified_at = timezone.now()
     quiz.save()

@@ -16,7 +16,7 @@ User = get_user_model()
 class QuizListView(pq_objects.FailedAccessMixin, pq_objects.PQFormContextMixin, LoginRequiredMixin, FilterView):
     model = Quiz
     filterset_class = QuizFilter
-    ordering = ['id']
+    ordering = ['-modified_at']
     redirect_url = reverse_lazy('users:login')
     template_name = 'quiz/list.html'
     context_object_name = 'objects'

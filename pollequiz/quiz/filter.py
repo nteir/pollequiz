@@ -10,6 +10,7 @@ class QuizFilter(django_filters.FilterSet):
     )
 
     name = django_filters.CharFilter(field_name='name', lookup_expr='icontains')
+    author = django_filters.CharFilter(field_name='author', lookup_expr='icontains')
     is_poll = django_filters.ChoiceFilter(field_name='is_poll', choices=POLL_CHOICES, label=txt.POLL_FILTER_LABEL)
 
     class Meta:
