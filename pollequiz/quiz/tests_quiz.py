@@ -14,7 +14,7 @@ class QuizTestCase(TestCase):
         self.user = User.objects.get(pk=1)
         self.model = Quiz
         self.object = self.model.objects.get(pk=1)
-        self.object_list = self.model.objects.all().order_by('id')
+        self.object_list = self.model.objects.all().order_by('-modified_at')
         self.context_name = 'objects'
         self.new_data = {
             'name': 'tquiz',
