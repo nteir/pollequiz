@@ -32,6 +32,7 @@ class Question(models.Model):
     q_type = models.CharField(choices=TYPES, max_length=4)
     text = models.TextField()
     points = models.IntegerField(default=0, verbose_name=_('Points for correct answer'))
+    ordering = ['q_number']
 
     def get_answers_list(self):
         return list(Answer.objects.filter(question=self.id).order_by('a_number'))
@@ -42,6 +43,7 @@ class Answer(models.Model):
     a_number = models.IntegerField(verbose_name=_('Answer number'))
     text = models.TextField()
     correct = models.BooleanField(default=False, verbose_name=_('This answer is correct'))
+    ordering = ['a_number']
 
 
 @receiver(post_save, sender=Question)

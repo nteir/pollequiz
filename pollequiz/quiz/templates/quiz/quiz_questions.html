@@ -9,6 +9,7 @@
         <h5 class="card-header">{{quiz.name}}</h5>
         <div class="card-body">
           <p class="card-text">{{quiz.description}}</p>
+          <p><a href="{% url 'run:takes_list' quiz.id %}" class="btn btn-dark">{% translate 'Quiz takes results' %}</a></p>
           <table class="table table-sm table-borderless">
             <tr>
                 <td>{% translate 'Author' %}</td>

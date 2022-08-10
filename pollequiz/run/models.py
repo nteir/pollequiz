@@ -8,6 +8,7 @@ class QuizTake(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, verbose_name=_('Quiz'))
     taker_name = models.CharField(max_length=250, blank=False, verbose_name=_('Taker name'))
     quiz_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Quiz date'))
+    ordering = ['-quiz_date']
 
 
 class QuizTakeLog(models.Model):

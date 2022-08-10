@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n bootstrap4 %}
+
+{% block content %}
+    <main role="main" class="container wrapper flex-grow-1">
+        <h1 class="my-4">{% translate 'Quiz takes' %}</h1>
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">{% translate 'Quiz' %}</th>
+                    <th scope="col">{% translate 'Taker name' %}</th>
+                    <th scope="col">{% translate 'Quiz date' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for take in objects %}
+                <tr>
+                    <th scope="row"><a href="{% url 'run:takes_detail' take.id %}">{{take.id}}</a></th>
+                    <td><a href="{% url 'quiz:quiz_card' take.quiz.id %}">{{take.quiz.name}}</a></td>
+                    <td>{{take.taker_name}}</td>
+                    <td>{{take.quiz_date}}</td>
+                </tr>              
+                {% endfor %}
+            </tbody> 
+        </table>
+    </main>
+{% endblock %}

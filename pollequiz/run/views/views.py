@@ -7,12 +7,9 @@ from pollequiz.quiz.models import Quiz, Question, Answer
 from pollequiz.quiz.filter import QuizFilter
 from pollequiz.run.models import QuizTake, QuizTakeLog
 from django.http import HttpResponseRedirect
-from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 import pollequiz.pq_objects as pq_objects
 import pollequiz.text_constants as txt
-
-User = get_user_model()
 
 
 class QuizListView(pq_objects.PQFormContextMixin, FilterView):
@@ -28,7 +25,7 @@ class TakeFirstPage(pq_objects.PQFormContextMixin, CreateView):
     model = QuizTake
     form_class = TakeForm
     template_name = 'quiz/quiz_form.html'
-    success_url = reverse_lazy
+    success_url = reverse_lazy('run:quiz_list')
     title = txt.TAKE_QUIZ_TITLE
     btn_text = txt.TAKE_QUIZ_BTN
 
@@ -38,7 +35,8 @@ class TakeFirstPage(pq_objects.PQFormContextMixin, CreateView):
         return reverse_lazy('run:quiz_take', kwargs={'quiz_id': quiz_id, 'pk': self.object.id, 'q_id': first_q_id})
 
     def get_initial(self):
-        if self.request.user:
+        uname = ''
+        if self.request.user.is_authenticated:
             uname = ' '.join((self.request.user.first_name, self.request.user.last_name))
             uname = uname.strip()
             if not uname:
