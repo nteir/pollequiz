@@ -82,7 +82,7 @@ class TakeQuestion(FormView):
         curr_id = self.kwargs.get('q_id')
         curr_index = q_list.index(curr_id)
         if curr_index + 1 >= len(q_list):
-            url = reverse_lazy('home')
+            url = reverse_lazy('run:quiz_result', kwargs={'pk': self.kwargs['pk']})
         else:
             next = q_list[curr_index + 1]
             url = reverse_lazy('run:quiz_take', kwargs={'quiz_id': quiz.id, 'pk': self.kwargs['pk'], 'q_id': next})
@@ -95,6 +95,19 @@ class TakeQuestion(FormView):
         log_entry.a_id = Answer.objects.get(id=form.data.get('answers'))
         log_entry.save()
         return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        answer_list = form.data.getlist('answers')
+        if answer_list:
+            for ans in answer_list:
+                log_entry = QuizTakeLog()
+                log_entry.take_id = QuizTake.objects.get(id=self.kwargs.get('pk'))
+                log_entry.q_id = self.question
+                log_entry.a_id = Answer.objects.get(id=ans)
+                log_entry.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super().form_invalid(form)
 
 
 class QuizResult(ListView):
