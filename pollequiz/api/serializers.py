@@ -6,6 +6,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = [
+            # 'question',
             'a_number',
             'text',
             'correct',
@@ -18,6 +19,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = [
+            # 'quiz',
             'q_number',
             'q_type',
             'text',
@@ -47,14 +49,17 @@ class QuizSerializer(serializers.ModelSerializer):
 
 class FullQuizSerializer(serializers.ModelSerializer):
     question_set = QuestionSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source='author.username', read_only=True)
 
     class Meta:
         model = Quiz
         fields = [
             'name',
+            'author_username',
             'question_set',
         ]
         read_only_fields = [
             'name',
+            'author_username',
             'question_set',
         ]
