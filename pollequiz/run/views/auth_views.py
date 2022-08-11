@@ -31,11 +31,12 @@ class ResultsForAuthors(TemplateView):
 
     def get_context_data(self, **kwargs):
         take = QuizTake.objects.get(id=self.kwargs['pk'])
-        # quiz = take.quiz
-
+        quiz = take.quiz
         log = QuizTakeLog.objects.filter(take_id=self.kwargs['pk']).select_related('q_id', 'a_id')
+        q_list = quiz.get_questions_list()
 
         context = super().get_context_data(**kwargs)
         context['take'] = take
+        context['q_list'] = q_list
         context['log'] = log
         return context
