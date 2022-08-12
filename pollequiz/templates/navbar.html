@@ -11,14 +11,17 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'quiz:list_all' %}">{% translate 'All quizes' %}</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'quiz:list_all' %}">{% translate 'All quizzes' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'quiz:list_my' %}">{% translate 'My quizes' %}</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'quiz:list_my' %}">{% translate 'My quizzes' %}</a>
                     </li>
                     {% endif %}
                     <li>
                         <a class="nav-link active" aria-current="page" href="{% url 'run:quiz_list' %}">{% translate 'Take a quiz' %}</a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" aria-current="page" href="{% url 'help' %}">{% translate 'Docs' %}</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">

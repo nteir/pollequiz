@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import HomeView
+from .views import HomeView, HelpView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', HomeView.as_view(), name='home'),
+    path('help/', HelpView.as_view(), name='help'),
     path('account/', include('pollequiz.users.urls')),
     path('api/', include('pollequiz.api.urls')),
     path('quiz/', include('pollequiz.quiz.urls')),

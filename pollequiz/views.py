@@ -7,3 +7,8 @@ User = get_user_model()
 class HomeView(TemplateView):
 
     template_name = "index.html"
+
+
+class HelpView(TemplateView):
+
+    template_name = "help.html"

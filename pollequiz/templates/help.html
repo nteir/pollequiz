@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+    <main role="main" class="container wrapper flex-grow-1">
+        <h1 class="my-4">{% translate 'Project description' %}</h1>
+        <div class="card-body p-5 bg-light mt-5">
+            <p>You can take quizzes and see your results in the end. Quiz authors can see the results of all runs for the quizzes they created.</p>
+            <p><img src='{% static "pq/img/00_quiz_take.png" %}' width='70%' alt="Quiz run"/></p>
+            <p>Create your own quizzes after login: navigate to My quizzes &gt; New quiz.</p>
+            <p><img src='{% static "pq/img/01_new_q.png" %}' width='70%' alt="New question"/></p>
+            <p><img src='{% static "pq/img/02_quiz_detail.png" %}' width='70%' alt="Quiz details"/></p>
+            <p><img src='{% static "pq/img/03_new_a.png" %}' width='70%' alt="Add answers"/></p>
+        </div>
+    </main>
+{% endblock %}
